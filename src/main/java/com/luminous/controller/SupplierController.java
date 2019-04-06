@@ -54,9 +54,9 @@ public class SupplierController {
 			return "Supplier";
 		}
 			@RequestMapping(value="/UpdateSupplier",method=RequestMethod.POST)
-		public String updateSupplier(Model m,@RequestParam("supplierID")int supplierID,@RequestParam("supplierName")String supplierName,@RequestParam("supplierAddr")String supplierAddr)
+		public String updateSupplier(Model m,@RequestParam("supplierID")int supplierId,@RequestParam("supplierName")String supplierName,@RequestParam("supplierAddr")String supplierAddr)
 		{
-			Supplier supplier=supplierDAO.getSupplier(supplierID);
+			Supplier supplier=supplierDAO.getSupplier(supplierId);
 			supplier.setSupplierName(supplierName);
 			supplier.setSupplierAddr(supplierAddr);
 			supplierDAO.updateSupplier(supplier);

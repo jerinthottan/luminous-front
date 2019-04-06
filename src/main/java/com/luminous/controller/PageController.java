@@ -1,3 +1,4 @@
+
 package com.luminous.controller;
 
 import org.springframework.stereotype.Controller;
@@ -14,24 +15,11 @@ public class PageController {
 		return "Login";
 	}
 	@RequestMapping("/signup")
-	public String showSignUp(Model m)
+	public String showSignup(Model m)
 	{
-		m.addAttribute("pageinfo","SignUp");
-		return "SignUp";
+		m.addAttribute("pageinfo","Signup");
+		return "Signup";
 	}
-	@RequestMapping("/aboutus")
-	public String showAboutUs(Model m)
-	{
-		m.addAttribute("pageinfo","AboutUs");
-		return "AboutUs";
-	}
-	@RequestMapping("/contactus")
-	public String hai(Model m)
-	{
-		m.addAttribute("pageinfo","ContactUs");
-		return "Contactus";
-	}
-	
 	
 	@RequestMapping("/")
 	public String showHeader(Model m)

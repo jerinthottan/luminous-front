@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html"%>
 <%@include file="Header.jsp"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,7 +14,7 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-4 col-md-offset-4">
-    		<div class="panel panel-default">
+    		<div class="panel panel-primary">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Category</h3>
 			 	</div>
@@ -26,7 +27,7 @@
 			    		<div class="form-group">
 			    			<input class="form-control" placeholder="CategoryDesc" name="CategoryDesc" type="text">
 			    		</div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="AddCategory">
+			    		<input class="btn btn-primary " type="submit" value="AddCategory">
 			    	</fieldset>
 			      	</form>
 			    </div>
@@ -35,13 +36,26 @@
 	</div>
 </div>
   </form>
-  <table class="table-bordered" align="center"> 
-    <tr>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <legend>Manage Category</legend>
+        </div>
+    </div>
+    
+	
+	<div class="row">
+	    <div class="col-md-12">
+	        <table class="table table-responsive table-hover table-bordered ">
+<thead>
+      <tr class="info">
     <td> Category ID</td>
     <td> Category Name</td>
     <td> Category Desc</td>
     <td> Operations</td>
     </tr>
+    </thead>
+    <tbody>
     <c:forEach items="${listCategories}" var="category">
     <tr>
       <td>${category.categoryID}</td>

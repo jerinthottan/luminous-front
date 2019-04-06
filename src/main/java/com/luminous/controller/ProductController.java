@@ -1,5 +1,9 @@
+  
 package com.luminous.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.luminous.dao.CategoryDAO;
 import com.luminous.dao.ProductDAO;
@@ -34,8 +40,6 @@ public class ProductController
 	{
 		Product product=new Product();
 		m.addAttribute(product);
-		
-		
 		List<Product> listProducts=productDAO.listProducts();
 		m.addAttribute("productList",listProducts);
 		m.addAttribute("categoryList",this.getCategories());
@@ -43,7 +47,7 @@ public class ProductController
 		return "Product";
 	}
 	@RequestMapping(value="/InsertProduct",method=RequestMethod.POST)
-	public String insertProduct(@ModelAttribute("product")Product product,Model m)
+	public String insertProduct(@ModelAttribute("product")Product product,@RequestParam("productimage") MultipartFile filedet,Model m)
 	{
 	    productDAO.addProduct(product);
 		
@@ -51,7 +55,32 @@ public class ProductController
 	    m.addAttribute(product1);
 	    m.addAttribute("pageinfo","Manage Product");
 	    m.addAttribute("categoryList",this.getCategories());
-		
+	    String imagepath="C:\\New folder\\luminous-front\\src\\main\\webapp\\resources\\images\\";
+	    imagepath=imagepath+String.valueOf(product.getProductId())+".jpg";
+	    File image=new File(imagepath);
+	    
+	    if(!filedet.isEmpty())
+	    {
+	    	try
+	    	{
+	    		byte buff[]=filedet.getBytes();
+	    		FileOutputStream fos=new FileOutputStream(image);
+	    		BufferedOutputStream bos=new BufferedOutputStream(fos);
+	    		bos.write(buff);
+	    		bos.close();
+	    		
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		m.addAttribute("Exception message","Exception in uploading the image:"+e.getMessage());
+	    		
+	    	}
+	    }
+	    else
+	    {
+	    	m.addAttribute("error message", "problem in uploadinf the image:");
+	    }
+	    
 		List<Product> listProducts=productDAO.listProducts();
 		m.addAttribute("productList", listProducts);
 		
@@ -76,7 +105,24 @@ public class ProductController
 
 		return "Product";
 		}
+	@RequestMapping("/productDisplay")
+	public String displayProduct(Model m)
+	{
+		m.addAttribute("pageinfo", "Product Gallery");
+		List<Product> listProducts=productDAO.listProducts();
+		m.addAttribute("productList", listProducts);
+		return "ProductDisplay";
+	}
 	
+	@RequestMapping("/productDetailsDisplay/{productId}")
+	public String ProductDetailsDisplay(@PathVariable("productId")int productId,Model m)
+	{
+		m.addAttribute("pageinfo","Product Info");
+		Product product=productDAO.getProduct(productId);
+		m.addAttribute("product",product);
+		return "ProductDetailsDisplay";
+		
+	}
 	@RequestMapping(value="/UpdateProduct",method=RequestMethod.POST)
     public String updateProduct(@ModelAttribute ("product")Product product,Model m)
 	

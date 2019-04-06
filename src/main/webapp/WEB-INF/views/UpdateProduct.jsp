@@ -2,6 +2,9 @@
 <%@include file="Header.jsp"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<html>
+<body style="background-image: url('<c:url value='resources/images/bgproject.jpg'/>')" >
+
 <br/><br/>
 
 <c:url var="updateproduct" value="/UpdateProduct"/>

@@ -10,7 +10,7 @@
     </td>
     <tr>
       <td> Supplier ID </td>
-       <td><input type="text" name="supplierID" value="${supplier.supplierID}" readonly/></td>
+       <td><input type="text" name="supplierID" value="${supplier.supplierId}" readonly/></td>
      </tr>
     <tr>
       <td> Supplier Name </td>
@@ -18,7 +18,7 @@
      </tr>
      <tr>
        <td> Supplier Address </td>
-      <td><input type="text" name="Supplier Address" value="${supplier.supplierSAddr}"/></td>
+      <td><input type="text" name="Supplier Address" value="${supplier.supplierAddr}"/></td>
      </tr>
      <tr>
        <td colspan="2">

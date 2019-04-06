@@ -2,12 +2,11 @@
 <%@include file="Header.jsp"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<br/><br/>
-
 <form:form action="InsertProduct" modelAttribute="product" method="post" enctype="multipart/form-data">
-<table align="center" class="table-bordered">
+<table align=right class="table">
      <tr>
-        <td colspan="2"><center>Product Information</center></td>
+              <td colspan="1">
+      <center><h2>Product Information</h2></center></td>
      </tr>
      <tr>
          <td>Product Name</td>
@@ -31,22 +30,30 @@
             </td>
          </tr>
          <tr>
-             <td>Supplier</td>
+             <td>SupplierId</td>
              <td><form:input path="supplierId"/></td>
           </tr>
           <tr>
               <td>Product Desc</td>
               <td><form:input path="productDesc"/></td>
            </tr>
-           
            <tr>
-              <td colspan="2"><center><input type="submit" value="AddProduct"/></center></td>
+              <td>Product image</td>
+              <td><form:input type="file" path="productimage"/></td>
+           </tr>
+           <tr>
+              <td colspan="2"><center><input type="submit" value="InsertProduct"/></center></td>
            </tr>
         </table>
         </form:form>
-        
-        
-        <table align="center" class="table-bordered">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <legend>Manage Product</legend>
+        </div>
+    </div>
+    
+	<table align="center" class="table table-responsive table-hover table-bordered ">
         <tr>
            <td>Product ID</td>
            <td>Product Name</td>
@@ -55,7 +62,7 @@
            <td>Supplier</td>
            <td>Operations</td>
          </tr>
-         <c:forEach items="${ProductList}" var="product">
+         <c:forEach items="${productList}" var="product">
          <tr>
             <td>${product.productId}</td>
             <td>${product.productName}</td>
@@ -63,9 +70,9 @@
             <td>${product.stock}</td>
             <td>${product.supplierId}</td>
             <td>
-         <a href="<c:url value="/editProduct/${product.productId}"/>"class="btn btn-success">Edit</a>/
+                  <a href="<c:url value="/editProduct/${product.productId}"/>"class="btn btn-success">Edit</a>
                   <a href="<c:url value="/deleteProduct/${product.productId}"/>"class="btn btn-danger">Delete</a>
-      </td>   
+            </td>   
           </tr>
           </c:forEach>
           </table>
